@@ -4,6 +4,21 @@ import { RootState } from "../../app/store";
 import { fetchTodos, deleteTodo, updateTodo } from "../../features/todoSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
+import AddTodoForm from "./AddTodoForm";
+
+import "./TodoList.css";
+
+// MUI
+import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { styled } from "@mui/material/styles";
+
+const Div = styled("div")(({ theme }) => ({
+	...theme.typography.button,
+	backgroundColor: theme.palette.background.paper,
+	padding: theme.spacing(1),
+}));
 
 const TodoList: React.FC = () => {
 	const dispatch: ThunkDispatch<RootState, undefined, AnyAction> =
@@ -25,26 +40,38 @@ const TodoList: React.FC = () => {
 	}
 
 	return (
-		<ul>
-			{todos.map((todo) => (
-				<li key={todo.id}>
-					<input
-						type="checkbox"
-						checked={todo.completed}
-						onChange={() =>
-							dispatch(
-								updateTodo({
-									...todo,
-									completed: !todo.completed,
-								}),
-							)
-						}
-					/>
-					<span>{todo.text}</span>
-					<button onClick={() => dispatch(deleteTodo(todo.id))}>Delete</button>
-				</li>
-			))}
-		</ul>
+		<div className="todo-page">
+			<AddTodoForm />
+			<ul className="todo-list">
+				{todos.map((todo) => (
+					<li
+						key={todo.id}
+						className={`todo-item ${todo.completed ? "completed" : ""}`}
+					>
+						<Checkbox
+							color="success"
+							checked={todo.completed}
+							onChange={() =>
+								dispatch(
+									updateTodo({
+										...todo,
+										completed: !todo.completed,
+									}),
+								)
+							}
+						/>
+
+						<Div>{todo.text}</Div>
+
+						<Button
+							variant="contained"
+							onClick={() => dispatch(deleteTodo(todo.id))}
+							startIcon={<DeleteIcon />}
+						></Button>
+					</li>
+				))}
+			</ul>
+		</div>
 	);
 };
 

@@ -25,3 +25,5 @@ export const deleteTodo = async (id: number) => {
 	const response = await axios.delete(`${BASE_URL}/todos/${id}`);
 	return response.data;
 };
+
+// P.S. в идеале перенести сюда из todoSlice запросы на сервер, чтобы они были отдельно

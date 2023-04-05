@@ -37,6 +37,7 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (text: any) => {
 export const deleteTodo = createAsyncThunk(
 	"todos/deleteTodo",
 	async (id: number) => {
+		await axios.post(`${BASE_URL}/trash`);
 		await axios.delete(`${BASE_URL}/todos/${id}`);
 		return id;
 	},

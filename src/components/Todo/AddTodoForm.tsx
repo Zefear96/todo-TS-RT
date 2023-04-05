@@ -5,6 +5,11 @@ import { AnyAction } from "redux";
 import { addTodo } from "../../features/todoSlice";
 import { RootState } from "../../app/store";
 
+// MUI
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+
 const AddTodoForm: React.FC = () => {
 	const dispatch: ThunkDispatch<RootState, undefined, AnyAction> =
 		useDispatch();
@@ -22,13 +27,24 @@ const AddTodoForm: React.FC = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit}>
-			<input
+		<form onSubmit={handleSubmit} className="add-form-todo">
+			<TextField
+				id="standard-basic"
+				label="To do..."
+				variant="standard"
 				type="text"
 				value={text}
 				onChange={(e) => setText(e.target.value)}
+				className="inp-add-todo"
 			/>
-			<button type="submit">Add Todo</button>
+			<Button
+				variant="contained"
+				type="submit"
+				id="btn-add-todo"
+				startIcon={<AddCircleOutlineIcon />}
+			>
+				Add Todo
+			</Button>
 		</form>
 	);
 };
