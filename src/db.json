@@ -1,0 +1,10 @@
+{
+  "todos": [
+    {
+      "text": "dsa",
+      "completed": false,
+      "id": 1
+    }
+  ],
+  "trash": []
+}
