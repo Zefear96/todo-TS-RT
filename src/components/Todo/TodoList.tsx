@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
-import { fetchTodos, deleteTodo, updateTodo } from "../../features/todoSlice";
+import {
+	fetchTodos,
+	deleteTodo,
+	updateTodo,
+	getOneTodo,
+} from "../../features/todoSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import AddTodoForm from "./AddTodoForm";
@@ -13,6 +18,7 @@ import Checkbox from "@mui/material/Checkbox";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { styled } from "@mui/material/styles";
+import AutoFixHighIcon from "@mui/icons-material/AutoFixHigh";
 
 const Div = styled("div")(({ theme }) => ({
 	...theme.typography.button,
@@ -44,30 +50,46 @@ const TodoList: React.FC = () => {
 			<AddTodoForm />
 			<ul className="todo-list">
 				{todos.map((todo) => (
-					<li
-						key={todo.id}
-						className={`todo-item ${todo.completed ? "completed" : ""}`}
-					>
-						<Checkbox
-							color="success"
-							checked={todo.completed}
-							onChange={() =>
-								dispatch(
-									updateTodo({
-										...todo,
-										completed: !todo.completed,
-									}),
-								)
-							}
-						/>
+					<li key={todo.id}>
+						<Div className={`todo-item ${todo.completed ? "completed" : ""}`}>
+							<Checkbox
+								checked={todo.completed}
+								className="inp-checkbox-todo"
+								onChange={() =>
+									dispatch(
+										updateTodo({
+											...todo,
+											completed: !todo.completed,
+										}),
+									)
+								}
+							/>
+							<span className="text-todo">{todo.text}</span>
 
-						<Div>{todo.text}</Div>
+							<Button
+								variant="outlined"
+								// onChange={() =>
+								// 	dispatch(
+								// 		getOneTodo({
+								// 			...todo,
+								// 			tetextxt: ,
+								// 		}),
+								// 	)
+								// }
+								className="btn-edit-todo"
+							>
+								<AutoFixHighIcon />
+							</Button>
 
-						<Button
-							variant="contained"
-							onClick={() => dispatch(deleteTodo(todo.id))}
-							startIcon={<DeleteIcon />}
-						></Button>
+							<Button
+								variant="outlined"
+								onClick={() => dispatch(deleteTodo(todo))}
+								color="error"
+								className="btn-del-todo"
+							>
+								<DeleteIcon />
+							</Button>
+						</Div>
 					</li>
 				))}
 			</ul>

@@ -17,11 +17,26 @@
 
 #btn-add-todo {
   margin: auto 20px;
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+  background: rgb(150, 228, 238) !important;
+  color: rgb(27, 25, 25);
+  height: 40px;
+  border-radius: 20px;
+}
+
+#btn-add-todo:hover {
+  box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
+  transition: box-shadow 0.6s ease-in-out;
 }
 
 .inp-add-todo {
   width: 70%;
   margin: 20px auto !important;
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+  border-radius: 10px;
+  height: 60px;
+  padding: 10px !important;
+  background: rgb(119, 229, 243) !important;
 }
 
 .todo-list {
@@ -29,16 +44,52 @@
   margin: auto;
   justify-content: center;
   padding: 0;
+  list-style-type:none
 }
 
 .todo-item {
   display: flex;
-  margin: 10px auto;
+  margin: 20px auto;
   width: 100%;
   justify-content: space-around;
-
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+  background: rgb(150, 228, 238) !important;
+  border-radius: 10px;
 }
 
 .todo-item.completed {
   text-decoration: line-through;
+  box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
+  transition: box-shadow 0.6s ease-in-out;
+  background: rgb(143, 218, 228) !important;
+}
+
+.text-todo {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.btn-del-todo {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  border: none !important;
+  background: #FFC7C8 !important;
+  color: rgb(211, 84, 84) !important;
+  border-radius: 10px !important;
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+}
+
+.btn-del-todo:hover {
+  box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
+  transition: box-shadow 0.6s ease-in-out;
+}
+
+.inp-checkbox-todo {
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+  color: rgb(211, 84, 84) !important;
+  background: #FFC7C8 !important;
+  border-radius: 10px;
+  margin: auto 20px !important;
 }

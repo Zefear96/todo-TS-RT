@@ -29,13 +29,14 @@ const AddTodoForm: React.FC = () => {
 	return (
 		<form onSubmit={handleSubmit} className="add-form-todo">
 			<TextField
-				id="standard-basic"
+				id="outlined-basic"
 				label="To do..."
-				variant="standard"
+				variant="outlined"
 				type="text"
 				value={text}
 				onChange={(e) => setText(e.target.value)}
 				className="inp-add-todo"
+				autoFocus
 			/>
 			<Button
 				variant="contained"

@@ -1,19 +1,13 @@
 {
-  "todos": [
-    {
-      "text": "dasd",
-      "completed": false,
-      "id": 1
-    },
-    {
-      "text": "dsad",
-      "completed": false,
-      "id": 2
-    }
-  ],
+  "todos": [],
   "trash": [
     {
-      "id": 1
+      "todo": {
+        "text": "dasd",
+        "completed": false,
+        "id": 1
+      },
+      "id": 2
     }
   ]
 }

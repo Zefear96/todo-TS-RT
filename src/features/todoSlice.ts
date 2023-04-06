@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { strict } from "assert";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8000";
@@ -26,6 +27,22 @@ export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
 	return response.data;
 });
 
+export const getDeletedTodos = createAsyncThunk(
+	"todos/fetchTodos",
+	async () => {
+		const response = await axios.get<Todo[]>(`${BASE_URL}/trash`);
+		return response.data;
+	},
+);
+
+export const getOneTodo = createAsyncThunk(
+	"todos/fetchTodos",
+	async (todo: Todo) => {
+		const response = await axios.get<Todo[]>(`${BASE_URL}/todos/${todo.id}`);
+		return response.data;
+	},
+);
+
 export const addTodo = createAsyncThunk("todos/addTodo", async (text: any) => {
 	const response = await axios.post<Todo>(`${BASE_URL}/todos`, {
 		text,
@@ -36,10 +53,12 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (text: any) => {
 
 export const deleteTodo = createAsyncThunk(
 	"todos/deleteTodo",
-	async (id: number) => {
-		await axios.post(`${BASE_URL}/trash`);
-		await axios.delete(`${BASE_URL}/todos/${id}`);
-		return id;
+	async (todo: Todo) => {
+		const response = await axios.post<Todo>(`${BASE_URL}/trash`, {
+			todo,
+		});
+		await axios.delete(`${BASE_URL}/todos/${todo.id}`);
+		return todo.id;
 	},
 );
 
