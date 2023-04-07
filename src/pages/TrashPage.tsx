@@ -5,6 +5,8 @@ import { AnyAction } from "redux";
 import { fetchTodos, getDeletedTodos } from "../features/todoSlice";
 import { RootState } from "../app/store";
 
+import "./TrashPage.css";
+
 // MUI
 import { styled } from "@mui/material/styles";
 
@@ -22,7 +24,7 @@ const TrashPage: React.FC = () => {
 	);
 
 	useEffect(() => {
-		dispatch(fetchTodos());
+		dispatch(getDeletedTodos());
 	}, [dispatch]);
 
 	if (status === "loading") {
@@ -32,13 +34,15 @@ const TrashPage: React.FC = () => {
 	if (status === "failed") {
 		return <div>Error: {error}</div>;
 	}
+	console.log(todos);
 
 	return (
-		<div>
-			<ul className="todo-list">
+		<div className="trash-page">
+			<h1>Deleted Todo</h1>
+			<ul className="todo-trash-list">
 				{todos.map((todo) => (
 					<li key={todo.id}>
-						<Div>
+						<Div className="todo-item-trash">
 							<span className="text-todo-delete">{todo.text}</span>
 							{/* <Button
 								variant="outlined"

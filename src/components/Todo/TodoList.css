@@ -81,6 +81,17 @@
   box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
 }
 
+.btn-edit-todo {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  border: none !important;
+  background: #FFC7C8 !important;
+  color: rgb(211, 84, 84) !important;
+  border-radius: 10px !important;
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+}
+
 .btn-del-todo:hover {
   box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
   transition: box-shadow 0.6s ease-in-out;

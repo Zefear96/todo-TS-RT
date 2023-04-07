@@ -1,12 +1,20 @@
 {
-  "todos": [],
+  "todos": [
+    {
+      "text": "Im do iit",
+      "completed": false,
+      "id": 1
+    }
+  ],
   "trash": [
     {
-      "todo": {
-        "text": "dasd",
-        "completed": false,
-        "id": 1
-      },
+      "text": "dasdadasd",
+      "completed": true,
+      "id": 1
+    },
+    {
+      "text": "www",
+      "completed": false,
       "id": 2
     }
   ]

@@ -31,6 +31,7 @@ export const getDeletedTodos = createAsyncThunk(
 	"todos/fetchTodos",
 	async () => {
 		const response = await axios.get<Todo[]>(`${BASE_URL}/trash`);
+		console.log(response.data);
 		return response.data;
 	},
 );
@@ -54,8 +55,9 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (text: any) => {
 export const deleteTodo = createAsyncThunk(
 	"todos/deleteTodo",
 	async (todo: Todo) => {
+		console.log(todo);
 		const response = await axios.post<Todo>(`${BASE_URL}/trash`, {
-			todo,
+			...todo,
 		});
 		await axios.delete(`${BASE_URL}/todos/${todo.id}`);
 		return todo.id;
