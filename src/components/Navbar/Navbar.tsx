@@ -22,10 +22,10 @@ const pages = [
 		type: "TodoList",
 		path: "/list",
 	},
-	{
-		type: "Important",
-		path: "/important",
-	},
+	// {
+	// 	type: "Important",
+	// 	path: "/important",
+	// },
 	{
 		type: "Trash",
 		path: "/trash",
