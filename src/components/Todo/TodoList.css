@@ -49,11 +49,12 @@
 .todo-item {
   display: flex;
   margin: 20px auto;
-  width: 100%;
+  width: 90%;
   justify-content: space-around;
   box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
   background: rgb(150, 228, 238) !important;
   border-radius: 10px;
+  flex-wrap: wrap;
 }
 
 .todo-item.completed {
@@ -61,24 +62,14 @@
   box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
   transition: box-shadow 0.6s ease-in-out;
   background: rgb(143, 218, 228) !important;
+  margin: 20px auto;
 }
 
 .text-todo {
-  width: 100%;
+  width: 70%;
   display: flex;
   align-items: center;
-}
-
-.btn-del-todo {
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  border: none !important;
-  background: #FFC7C8 !important;
-  color: rgb(211, 84, 84) !important;
-  border-radius: 10px !important;
-  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
-  margin: auto 5px !important;
+  margin: 20px auto;
 }
 
 .btn-edit-todo {
@@ -90,12 +81,24 @@
   color: rgb(211, 84, 84) !important;
   border-radius: 10px !important;
   box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
-  margin: auto 5px !important;
+  margin: 10px 5px !important;
 }
 
 .btn-edit-todo:hover {
   box-shadow: inset -5px -5px 9px rgba(255, 255, 255, 0.45), inset 5px 5px 9px rgba(94, 104, 121, 0.3);
   transition: box-shadow 0.6s ease-in-out;
+}
+
+.btn-del-todo {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  border: none !important;
+  background: #FFC7C8 !important;
+  color: rgb(211, 84, 84) !important;
+  border-radius: 10px !important;
+  box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
+  margin: 10px 5px !important;
 }
 
 .btn-del-todo:hover {

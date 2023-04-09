@@ -4,7 +4,7 @@ import axios from "axios";
 
 const BASE_URL = "http://localhost:8000";
 
-interface Todo {
+export interface Todo {
 	id: number;
 	text: string;
 	completed: boolean;
@@ -14,32 +14,25 @@ interface TodoState {
 	todos: Todo[];
 	status: "idle" | "loading" | "failed";
 	error: string | null;
+	id: number;
 }
 
 const initialState: TodoState = {
 	todos: [],
 	status: "idle",
 	error: null,
+	id: Date.now(),
 };
 
-export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
+export const getTodos = createAsyncThunk("todos/getTodos", async () => {
 	const response = await axios.get<Todo[]>(`${BASE_URL}/todos`);
 	return response.data;
 });
 
 export const getDeletedTodos = createAsyncThunk(
-	"todos/fetchTodos",
+	"todos/getDeletedTodos",
 	async () => {
 		const response = await axios.get<Todo[]>(`${BASE_URL}/trash`);
-		console.log(response.data);
-		return response.data;
-	},
-);
-
-export const getOneTodo = createAsyncThunk(
-	"todos/fetchTodos",
-	async (todo: Todo) => {
-		const response = await axios.get<Todo[]>(`${BASE_URL}/todos/${todo.id}`);
 		return response.data;
 	},
 );
@@ -48,6 +41,7 @@ export const addTodo = createAsyncThunk("todos/addTodo", async (text: any) => {
 	const response = await axios.post<Todo>(`${BASE_URL}/todos`, {
 		text,
 		completed: false,
+		id: Date.now(),
 	});
 	return response.data;
 });
@@ -60,6 +54,14 @@ export const deleteTodo = createAsyncThunk(
 			...todo,
 		});
 		await axios.delete(`${BASE_URL}/todos/${todo.id}`);
+		return todo.id;
+	},
+);
+
+export const deleteFromTrash = createAsyncThunk(
+	"todos/deleteTodo",
+	async (todo: Todo) => {
+		await axios.delete(`${BASE_URL}/trash/${todo.id}`);
 		return todo.id;
 	},
 );
@@ -81,16 +83,20 @@ export const todoSlice = createSlice({
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchTodos.pending, (state) => {
+			.addCase(getTodos.pending, (state) => {
 				state.status = "loading";
 			})
-			.addCase(fetchTodos.fulfilled, (state, action) => {
+			.addCase(getTodos.fulfilled, (state, action) => {
 				state.status = "idle";
 				state.todos = action.payload;
 			})
-			.addCase(fetchTodos.rejected, (state, action) => {
+			.addCase(getTodos.rejected, (state, action) => {
 				state.status = "failed";
 				state.error = action.error.message || null;
+			})
+			.addCase(getDeletedTodos.fulfilled, (state, action) => {
+				state.status = "idle";
+				state.todos = action.payload;
 			})
 			.addCase(addTodo.fulfilled, (state, action) => {
 				state.todos.push(action.payload);

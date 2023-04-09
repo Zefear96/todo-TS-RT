@@ -2,13 +2,15 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
-import { fetchTodos, getDeletedTodos } from "../features/todoSlice";
+import { getDeletedTodos, deleteFromTrash } from "../features/todoSlice";
 import { RootState } from "../app/store";
 
 import "./TrashPage.css";
 
 // MUI
 import { styled } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Div = styled("div")(({ theme }) => ({
 	...theme.typography.button,
@@ -39,22 +41,26 @@ const TrashPage: React.FC = () => {
 	return (
 		<div className="trash-page">
 			<h1>Deleted Todo</h1>
+
 			<ul className="todo-trash-list">
-				{todos.map((todo) => (
-					<li key={todo.id}>
-						<Div className="todo-item-trash">
-							<span className="text-todo-delete">{todo.text}</span>
-							{/* <Button
-								variant="outlined"
-								onClick={() => dispatch(deleteTodo(todo))}
-								color="error"
-								className="btn-del-todo"
-							>
-								<DeleteIcon />
-							</Button> */}
-						</Div>
-					</li>
-				))}
+				{todos ? (
+					todos.map((todo) => (
+						<li key={todo.id}>
+							<Div className="todo-item-trash">
+								<span className="text-todo-delete">{todo.text}</span>
+								<Button
+									variant="outlined"
+									onClick={() => dispatch(deleteFromTrash(todo))}
+									className="btn-del-todo"
+								>
+									<DeleteIcon />
+								</Button>
+							</Div>
+						</li>
+					))
+				) : (
+					<h1>"Trash is empty"</h1>
+				)}
 			</ul>
 		</div>
 	);

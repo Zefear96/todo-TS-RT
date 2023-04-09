@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../app/store";
 import {
-	fetchTodos,
+	getTodos,
 	deleteTodo,
 	updateTodo,
-	getOneTodo,
+	Todo,
 } from "../../features/todoSlice";
 import { ThunkDispatch } from "redux-thunk";
 import { AnyAction } from "redux";
 import AddTodoForm from "./AddTodoForm";
+import TextField from "@mui/material/TextField";
 
 import "./TodoList.css";
 
@@ -33,9 +34,30 @@ const TodoList: React.FC = () => {
 		(state: RootState) => state.todo,
 	);
 
+	const [text, setText] = useState("");
+
 	useEffect(() => {
-		dispatch(fetchTodos());
+		dispatch(getTodos());
 	}, [dispatch]);
+
+	const handleSubmit = (
+		e: React.FormEvent<HTMLFormElement>,
+		todoId: number,
+	) => {
+		e.preventDefault();
+		dispatch(
+			updateTodo({
+				id: todoId,
+				text,
+				completed: false,
+			}),
+		);
+		setText("");
+	};
+
+	const handleDelete = (todoId: any) => {
+		dispatch(deleteTodo(todoId));
+	};
 
 	if (status === "loading") {
 		return <div>Loading...</div>;
@@ -66,29 +88,40 @@ const TodoList: React.FC = () => {
 							/>
 							<span className="text-todo">{todo.text}</span>
 
-							<Button
-								variant="outlined"
-								// onChange={() =>
-								// 	dispatch(
-								// 		getOneTodo({
-								// 			...todo,
-								// 			tetextxt: ,
-								// 		}),
-								// 	)
-								// }
-								className="btn-edit-todo"
+							{/* <form
+								onSubmit={(e) => handleSubmit(e, todo.id)}
+								style={{ display: "none" }}
 							>
-								<AutoFixHighIcon />
-							</Button>
+								<TextField
+									id="outlined-basic"
+									variant="outlined"
+									type="text"
+									value={text}
+									onChange={(e) => setText(e.target.value)}
+									className="inp-add-todo"
+									autoFocus
+								/>
+								<Button type="submit" variant="outlined">
+									Update Todo
+								</Button>
+							</form> */}
 
-							<Button
-								variant="outlined"
-								onClick={() => dispatch(deleteTodo(todo))}
-								color="error"
-								className="btn-del-todo"
-							>
-								<DeleteIcon />
-							</Button>
+							<div className="btns-todo-list">
+								{/* <Button
+									variant="outlined"
+									onClick={() => handleEdit(todo)}
+									className="btn-edit-todo "
+								>
+									<AutoFixHighIcon />
+								</Button> */}
+								<Button
+									variant="outlined"
+									onClick={() => handleDelete(todo)}
+									className="btn-del-todo"
+								>
+									<DeleteIcon />
+								</Button>
+							</div>
 						</Div>
 					</li>
 				))}

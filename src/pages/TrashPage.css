@@ -23,4 +23,10 @@
   box-shadow: -5px -5px 9px rgba(255, 255, 255, 0.45), 5px 5px 9px rgba(94, 104, 121, 0.3);
   background: rgb(150, 228, 238) !important;
   border-radius: 10px;
+  align-items: center;
+}
+
+.text-todo-delete {
+  width: 90%;
+  padding-left: 20px;
 }

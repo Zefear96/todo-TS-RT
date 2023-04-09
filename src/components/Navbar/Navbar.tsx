@@ -13,6 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import BallotIcon from "@mui/icons-material/Ballot";
+import RestoreFromTrashIcon from "@mui/icons-material/RestoreFromTrash";
 
 import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
@@ -21,6 +23,7 @@ const pages = [
 	{
 		type: "TodoList",
 		path: "/list",
+		icon: <BallotIcon />,
 	},
 	// {
 	// 	type: "Important",
@@ -29,6 +32,7 @@ const pages = [
 	{
 		type: "Trash",
 		path: "/trash",
+		icon: <RestoreFromTrashIcon />,
 	},
 ];
 
@@ -132,6 +136,7 @@ function ResponsiveAppBar() {
 											className="nav-pages-link"
 										>
 											{page.type}
+											{page.icon}
 										</Typography>
 									</MenuItem>
 								))}
@@ -177,6 +182,7 @@ function ResponsiveAppBar() {
 										}}
 									>
 										{page.type}
+										{page.icon}
 									</Typography>
 								</Button>
 							))}
